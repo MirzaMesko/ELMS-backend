@@ -1,0 +1,5 @@
+
+20220108	15:02:43	32831915-ba79-4cc3-a3eb-dc434eb4a462	TypeError:req.roles.map is not a function
+20220108	18:12:44	61195737-5f2b-4a73-98ce-f9b2c27bb815	TypeError:req.roles.map is not a function
+20220108	18:14:07	7f4cda2b-2904-49c1-ba3f-94e07e9efa3b	TypeError:req.roles.map is not a function
+20220108	18:15:37	83e1d026-059d-4bd3-918e-5a1c1565959f	TypeError:req.roles.map is not a function
