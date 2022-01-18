@@ -1,8 +1,10 @@
 const moongose = require('mongoose');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const connectDB = async () => {
     try {
-        await moongose.connect('mongodb+srv://elms:elms@cluster0.s7pcv.mongodb.net/Elms?retryWrites=true&w=majority', {
+        await moongose.connect(process.env.DATABASE_URI, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         })
