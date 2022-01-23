@@ -1,9 +1,9 @@
 const verifyRoles = (...allowedRoles) => {
     return (req, res, next) => {
-        // problem with verifiyng roles when creating new user witohout admin role !!!
-        if (!req.body?.roles) return res.sendStatus(401);
+        const userRoles = req.headers.roles.split(',');
+        if (!req.headers?.roles) return res.sendStatus(401);
         const rolesArray = [...allowedRoles];
-        const result = req.body.roles.map(role => rolesArray.includes(role)).find(value => value === true);
+        const result = userRoles.map(role => rolesArray.includes(role)).find(value => value === true);
         if (!result) return res.sendStatus(401);
         next();
     }
