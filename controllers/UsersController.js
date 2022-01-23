@@ -1,4 +1,5 @@
 const User = require('../model/User');
+const bcrypt = require('bcrypt');
 
 const getAllUsers = async (req, res) => {
     const users = await User.find().exec();
@@ -7,7 +8,6 @@ const getAllUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  //const employee = data.employees.find(employee => employee.id === req.body.id);
   if ( !req?.body?.id ) {
     return res.status(400).json({ 'message': 'Id parameter is required!'});
   };
@@ -34,9 +34,6 @@ const updateUser = async (req, res) => {
               })
     user.roles = await numRoles;
   };
-  // const filteredArray = data.employees.filter(employee => employee.id !== parseInt(req.body.id));
-  // const unsortedArray = [...filteredArray, employee];
-  // data.setEmployees(unsortedArray.sort((a, b) => a.id > b.id ? 1 : a.id < b.id ? -1 : 0));
   const result = await user.save();
   
   res.json(result);
@@ -77,8 +74,11 @@ const createNewUser = async (req, res) => {
               })
     await numRoles;
      try {
+       // encrypt the password
+       const hashedPwd = await bcrypt.hash(req.body.password, 10);
+
       const result = await User.create({ username: req.body.username, 
-        password: req.body.password, email: req.body.email, roles: numRoles, 
+        password: hashedPwd, email: req.body.email, roles: numRoles, 
         bio: req.body.bio, name: req.body.name});
       res.status(201).json(result);
      } catch (err) {
