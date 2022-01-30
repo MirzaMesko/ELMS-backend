@@ -47,8 +47,22 @@ const updateBook = async (req, res) => {
   res.json(result);
 };
 
+const deleteBook = async (req, res) => {
+  if ( !req?.body?.id ) {
+    return res.status(400).json({ 'message': 'Id parameter is required!'});
+  };
+  const book = await Book.findOne({ _id: req.body.id }).exec();
+  if (!book) {
+    return res.status(204).json({ 'message': `No book matches ${req.body.id}.`});
+  }
+  
+  const result = await Book.deleteOne({ _id: req.body.id });
+  res.json(result);
+};
+
 module.exports = {
     getAllBooks, 
     createNewBook,
-    updateBook
+    updateBook, 
+    deleteBook
 }
