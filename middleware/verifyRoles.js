@@ -1,6 +1,6 @@
 const verifyRoles = (...allowedRoles) => {
     return (req, res, next) => {
-        const userRoles = req.headers.roles.split(',');
+        const userRoles = req.headers.roles.split(',') || req.config.headers.roles.split(',');
         if (!req.headers?.roles) return res.sendStatus(401);
         const rolesArray = [...allowedRoles];
         const result = userRoles.map(role => rolesArray.includes(role)).find(value => value === true);
