@@ -1,18 +1,8 @@
-// const usersDB = {
-//   users: require("../model/users.json"),
-//   setUsers: function (data) {
-//     this.users = data;
-//   },
-// };
-
 const User = require('../model/User');
 
 const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
-// require("dotenv").config();
-// const fsPromises = require("fs").promises;
-// const path = require("path");
 
 const handleLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -20,12 +10,8 @@ const handleLogin = async (req, res) => {
     return res
       .status(400)
       .json({ message: "Username and password are required." });
-  // const hashedPwd = await bcrypt.hash(password, 10);
-  // const userExists = await usersDB.users.find(
-  //   (person) => person.username === user
-  // );
   const userExists = await User.findOne({ username: username }).exec();
-  if (!userExists) return res.sendStatus(401); // Unauthorized
+  if (!userExists) return res.sendStatus(401).json({ message: "Incorrect username or password! Please try again." }); // Unauthorized
 
   //evaluate password
   const match = await bcrypt.compare(password, userExists.password);
@@ -51,14 +37,7 @@ const handleLogin = async (req, res) => {
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: "1d" }
   );
-  // saving refreshToken with current user in users.josn before MongoDB
-  // const currentUser = { ...userExists, refreshToken };
-  // usersDB.setUsers([...otherUsers, currentUser]);
-  // await fsPromises.writeFile(
-  //   path.join(__dirname, "..", "model", "users.json"),
-  //   JSON.stringify(usersDB.users)
-  // );
-
+  
   //saving refreshToken to user in MongoDB collection
   userExists.refreshToken = refreshToken;
   const result = await userExists.save();
