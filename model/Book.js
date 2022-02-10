@@ -15,6 +15,10 @@ const bookSchema = new Schema({
         required: true
     },
     publisher: String,
+    category: {
+        type: String,
+        default: 'All Books',
+    },
     description:  String,
     serNo: {
         type: String,
