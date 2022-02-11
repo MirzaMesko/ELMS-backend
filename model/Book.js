@@ -20,6 +20,7 @@ const bookSchema = new Schema({
         default: 'All Books',
     },
     description:  String,
+    image: String,
     serNo: {
         type: String,
         required: true
