@@ -19,6 +19,7 @@ const updateUser = async (req, res) => {
   if (req?.body?.email) {user.email = req.body.email};
   if (req?.body?.bio) {user.bio = req.body.bio};
   if (req?.body?.name) {user.name = req.body.name};
+  if (req?.body?.image) {user.image = req.body.image};
   if (req?.body?.roles) {
     let numRoles = {};
     req.body.roles.map(role => {
@@ -78,7 +79,7 @@ const createNewUser = async (req, res) => {
        const hashedPwd = await bcrypt.hash(req.body.password, 10);
 
       const result = await User.create({ username: req.body.username, 
-        password: hashedPwd, email: req.body.email, roles: numRoles, 
+        password: hashedPwd, email: req.body.email, roles: numRoles, image: req.body.image,
         bio: req.body.bio, name: req.body.name});
       res.status(201).json(result);
      } catch (err) {
