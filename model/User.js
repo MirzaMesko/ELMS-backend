@@ -23,6 +23,7 @@ const userSchema = new Schema({
     },
     name: String,
     bio:  String,
+    image: String,
     refreshToken: String
 });
 
