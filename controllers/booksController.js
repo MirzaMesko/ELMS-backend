@@ -19,7 +19,7 @@ const createNewBook = async (req, res) => {
 
       const result = await Book.create({ title: req.body.title, 
         author: req.body.author, year: req.body.year, description: req.body.description, category: req.body.category,
-        serNo: req.body.serNo, publisher: req.body.publisher});
+        serNo: req.body.serNo, image: req.body.image, publisher: req.body.publisher});
       res.status(201).json(result);
      } catch (err) {
        console.log(err);
@@ -40,6 +40,7 @@ const updateBook = async (req, res) => {
   if (req?.body?.year) {book.year = req.body.year};
   if (req?.body?.description) {book.description = req.body.description};
   if (req?.body?.category) {book.category = req.body.category};
+  if (req?.body?.image) {book.image = req.body.image};
   if (req?.body?.publisher) {book.publisher = req.body.publisher};
   if (req?.body?.serNo) {book.serNo = req.body.serNo};
   
