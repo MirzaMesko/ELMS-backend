@@ -24,6 +24,7 @@ const userSchema = new Schema({
     name: String,
     bio:  String,
     image: String,
+    owedBooks: Array,
     refreshToken: String
 });
 
