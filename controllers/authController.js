@@ -26,7 +26,8 @@ const handleLogin = async (req, res) => {
     {
       'UserInfo': {
         'username': userExists.username,
-        'roles': roles
+        'roles': roles,
+        'image': userExists.image
       }
     },
     process.env.ACCESS_TOKEN_SECRET,
