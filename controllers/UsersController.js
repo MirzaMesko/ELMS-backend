@@ -20,6 +20,7 @@ const updateUser = async (req, res) => {
   if (req?.body?.bio) {user.bio = req.body.bio};
   if (req?.body?.name) {user.name = req.body.name};
   if (req?.body?.image) {user.image = req.body.image};
+  if (req?.body?.newOwedBooks) {user.owedBooks = req.body.newOwedBooks};
   if (req?.body?.roles) {
     let numRoles = {};
     req.body.roles.map(role => {
