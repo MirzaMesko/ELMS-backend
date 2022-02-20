@@ -43,6 +43,9 @@ const updateBook = async (req, res) => {
   if (req?.body?.image) {book.image = req.body.image};
   if (req?.body?.publisher) {book.publisher = req.body.publisher};
   if (req?.body?.serNo) {book.serNo = req.body.serNo};
+  if (req?.body?.available) {book.available = req.body.available};
+  if (req?.body?.owedBy) {book.owedBy = req.body.owedBy};
+  
   
   const result = await book.save();
   
