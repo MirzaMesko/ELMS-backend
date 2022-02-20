@@ -21,6 +21,14 @@ const bookSchema = new Schema({
     },
     description:  String,
     image: String,
+    available: {
+        type: String,
+        default: 'true',
+    },
+    owedBy: {
+        userId: String,
+        dueDate: String,
+    },
     serNo: {
         type: String,
         required: true
