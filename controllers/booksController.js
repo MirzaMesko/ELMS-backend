@@ -49,7 +49,7 @@ const updateBook = async (req, res) => {
   
   const result = await book.save();
   
-  res.json(result);
+  res.status(200).json(result);
 };
 
 const deleteBook = async (req, res) => {
