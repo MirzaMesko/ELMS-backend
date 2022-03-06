@@ -29,6 +29,7 @@ const bookSchema = new Schema({
         userId: String,
         dueDate: String,
     },
+    reservedBy: Array,
     serNo: {
         type: String,
         required: true
