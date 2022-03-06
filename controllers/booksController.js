@@ -45,6 +45,7 @@ const updateBook = async (req, res) => {
   if (req?.body?.serNo) {book.serNo = req.body.serNo};
   if (req?.body?.available) {book.available = req.body.available};
   if (req?.body?.owedBy) {book.owedBy = req.body.owedBy};
+  if (req?.body?.reservedBy) {book.reservedBy = req.body.reservedBy};
   
   
   const result = await book.save();
