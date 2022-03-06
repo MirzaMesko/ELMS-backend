@@ -26,6 +26,7 @@ const userSchema = new Schema({
     image: String,
     owedBooks: Array,
     readingHistory: Array,
+    notifications: Array,
     refreshToken: String
 });
 
