@@ -22,7 +22,8 @@ const updateUser = async (req, res) => {
   if (req?.body?.image) {user.image = req.body.image};
   if (req?.body?.readingHistory) {user.readingHistory = req.body.readingHistory};
   if (req?.body?.newOwedBooks) {user.owedBooks = req.body.newOwedBooks};
-  if (req?.body?.newNotification) {user.notifications = [ ...user.notifications, { message: req.body.newNotification, timestamp: new Date()}]};
+  if (req?.body?.notifications) {user.notifications = req.body.notifications};
+  if (req?.body?.newNotification) {user.notifications = [ ...user.notifications, { message: req.body.newNotification, timestamp: new Date(), seen: req.body.seen}]};
   if (req?.body?.roles) {
     let numRoles = {};
     req.body.roles.map(role => {
