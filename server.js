@@ -46,6 +46,7 @@ app.use('/logout', require('./routes/logout'));
 app.use(verifyJWT);
 app.use('/users', require('./routes/users'));
 app.use('/books', require('./routes/books'));
+app.use('/send', require('./routes/email'));
 
 app.all('*', (req, res) => {
   //res.sendFile('./views/index.html', { root: __dirname });
