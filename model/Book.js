@@ -29,6 +29,15 @@ const bookSchema = new Schema({
         userId: String,
         dueDate: String,
     },
+    rating: [{
+      userId: String,
+      rating: Number,  
+    }],
+    reviews: [{
+        userId: String,
+        timestamp: String,
+        review: String,
+    }],
     reservedBy: Array,
     serNo: {
         type: String,
