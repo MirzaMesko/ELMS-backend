@@ -46,6 +46,8 @@ const updateBook = async (req, res) => {
   if (req?.body?.available) {book.available = req.body.available};
   if (req?.body?.owedBy) {book.owedBy = req.body.owedBy};
   if (req?.body?.reservedBy) {book.reservedBy = req.body.reservedBy};
+  if (req?.body?.newRating) {book.rating = [ ...book.rating, { userId: req.body.newRating.userId, rating: req.body.newRating.value} ]};
+  if (req?.body?.newReview) {book.reviews = [ ...book.reviews, { userId: req.body.newReview.userId, timestamp: new Date().toDateString(), review: req.body.newReview.review} ]};
   
   
   const result = await book.save();
