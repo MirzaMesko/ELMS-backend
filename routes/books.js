@@ -4,6 +4,10 @@ const BooksController = require("../controllers/BooksController");
 const ROLES_LIST = require('../config/roles-list');
 const verifyRoles = require('../middleware/verifyRoles');
 
+router.route("/review").put(BooksController.updateBook)
+
+router.route("/rate").put(BooksController.updateBook)
+
 router.route("/").get(BooksController.getAllBooks)
 .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Librarian), BooksController.createNewBook)
 .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Librarian), BooksController.updateBook)
