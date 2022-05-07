@@ -6,6 +6,12 @@ const getAllBooks = async (req, res) => {
   res.json(books);
 };
 
+const getBookById = async (req, res) => {
+  const book = await Book.findOne({ _id: req.params.id}).exec();
+if (!book) return res.status(204).json({ 'message': 'No book found.' });
+res.json(book);
+};
+
 const createNewBook = async (req, res) => {
   
   if ( !req?.body?.serNo ) {
@@ -46,12 +52,39 @@ const updateBook = async (req, res) => {
   if (req?.body?.available) {book.available = req.body.available};
   if (req?.body?.owedBy) {book.owedBy = req.body.owedBy};
   if (req?.body?.reservedBy) {book.reservedBy = req.body.reservedBy};
-  if (req?.body?.reviews) {book.reviews = req.body.reviews};
-  if (req?.body?.newRating) {book.rating = [ ...book.rating, { userId: req.body.newRating.userId, rating: req.body.newRating.value} ]};
-  if (req?.body?.newReview) {book.reviews = [ ...book.reviews, { userId: req.body.newReview.userId, timestamp: new Date().toDateString(), review: req.body.newReview.review} ]};
-  
-  
+
   const result = await book.save();
+  
+  res.status(200).json(result);
+};
+
+const updateMultipleBooks = async (req, res) => {
+  if ( !req?.body?.title ) {
+    return res.status(400).json({ 'message': 'Title parameter is required!'});
+  };
+
+  const book = await Book.findOne({ title: req.body.title }).exec();
+  if (!book) {
+    return res.status(204).json({ 'message': `No book with title "${req.body.title}".`});
+  }
+
+  let result = [];
+
+  if (req?.body?.reviews) {
+    result = await Book.updateMany({ title: req.body.title}, {reviews: req.body.reviews} ).exec();
+  };
+
+  if (req?.body?.newRating) 
+  {
+    result = await Book.updateMany({ title: req.body.title}, {rating: [ ...book.rating, { userId: req.body.newRating.userId, rating: req.body.newRating.value} ]} ).exec();
+  }
+
+  if (req?.body?.newReview) {
+    let response = await Book.updateMany({ title: req.body.title}, {reviews: [ ...book.reviews, { userId: req.body.newReview.userId, timestamp: new Date().toDateString(), review: req.body.newReview.review} ]} ).exec();
+    if (response.acknowledged) {
+    result = { userId: req.body.newReview.userId, timestamp: new Date().toDateString(), review: req.body.newReview.review};
+  }
+  };
   
   res.status(200).json(result);
 };
@@ -70,8 +103,10 @@ const deleteBook = async (req, res) => {
 };
 
 module.exports = {
-    getAllBooks, 
+    getAllBooks,
+    getBookById, 
     createNewBook,
-    updateBook, 
+    updateBook,
+    updateMultipleBooks, 
     deleteBook
 }
