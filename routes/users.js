@@ -9,6 +9,4 @@ router.route("/").get(UsersController.getAllUsers)
 .put(verifyRoles(ROLES_LIST.Admin),UsersController.updateUser)
  .delete(verifyRoles(ROLES_LIST.Admin), UsersController.deleteUser);
 
-// router.route("/:id").get(EmployeesController.getEmployee);
-
 module.exports = router;

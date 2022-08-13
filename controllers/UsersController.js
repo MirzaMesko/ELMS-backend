@@ -87,7 +87,7 @@ const createNewUser = async (req, res) => {
         bio: req.body.bio, name: req.body.name});
       res.status(201).json(result);
      } catch (err) {
-       console.log(err);
+         return err
      }
 }
 
