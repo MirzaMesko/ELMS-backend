@@ -99,7 +99,7 @@ const deleteBook = async (req, res) => {
   }
   
   const result = await Book.deleteOne({ _id: req.body.id });
-  res.json(result);
+  res.status(200).json(result);
 };
 
 module.exports = {
