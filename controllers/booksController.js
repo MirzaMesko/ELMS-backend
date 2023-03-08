@@ -15,17 +15,18 @@ res.json(book);
 const createNewBook = async (req, res) => {
   
   if ( !req?.body?.serNo ) {
-       return res.status(400).json({ 'message': 'Serial number is required!'});
+       return res.status(200).json({ 'message': 'Serial number is required!' });
      };
      const book = await Book.findOne({ serNo: req.body.serNo }).exec();
       if (book) {
-        return res.status(400).json({ 'message': `A book with this serial number already exists in the database!`});
+        return res.status(200).json({ 'message': 'The serial number you entered is already in use!' });
       }
      try {
 
       const result = await Book.create({ title: req.body.title, 
         author: req.body.author, year: req.body.year, description: req.body.description, category: req.body.category,
         serNo: req.body.serNo, image: req.body.image, publisher: req.body.publisher});
+        console.log(result);
       res.status(201).json(result);
      } catch (err) {
        console.log(err);

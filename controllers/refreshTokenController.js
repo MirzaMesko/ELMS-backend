@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
+  console.log(cookies);
   if (!cookies?.jwt) return res.status(401).json({ message: "test" });
 
   const refreshToken = cookies.jwt;
