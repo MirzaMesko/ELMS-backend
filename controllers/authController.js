@@ -47,11 +47,11 @@ const handleLogin = async (req, res) => {
   const result = await userExists.save();
 
   res.cookie("jwt", refreshToken, {
-    httpOnly: false,
+    httpOnly: true,
     secure: true,
     maxAge: 24 * 60 * 60 * 1000,
     domain: '.gentle-blue-clownfish.cyclic.app',
-    // path: '/'
+    path: '/'
   }); // secure: true  - must be used in production for chrome to work!!
   res.json({ accessToken });
 };
