@@ -50,7 +50,7 @@ const handleLogin = async (req, res) => {
     httpOnly: false,
     secure: true,
     maxAge: 24 * 60 * 60 * 1000,
-    domain: '.meskovic.dev',
+    domain: '.gentle-blue-clownfish.cyclic.app',
     // path: '/'
   }); // secure: true  - must be used in production for chrome to work!!
   res.json({ accessToken });
