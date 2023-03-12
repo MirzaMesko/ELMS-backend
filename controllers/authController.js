@@ -51,6 +51,7 @@ const handleLogin = async (req, res) => {
     secure: true,
     maxAge: 24 * 60 * 60 * 1000,
     domain: '.elms.meskovic.dev',
+    path: '/'
   }); // secure: true  - must be used in production for chrome to work!!
   res.json({ accessToken });
 };
