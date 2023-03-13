@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
@@ -27,8 +28,11 @@ app.use(credentials);
 // cros origin resource sharing
 app.use(cors(corsOptions));
 
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+
 // built-in middleware for hadling urlencoded form data
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: true }));
 
 // built-in middleware for json
 app.use(express.json());
